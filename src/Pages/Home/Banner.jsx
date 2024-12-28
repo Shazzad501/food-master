@@ -35,7 +35,14 @@ const banners = [
 const Banner = () => {
   return (
     <div>
-    <Carousel>
+    <Carousel
+     autoPlay 
+     infiniteLoop 
+     interval={2000} 
+     stopOnHover 
+     showThumbs={false} 
+     showStatus={false}
+    >
        {banners.map((banner, idx)=><div key={idx}>
         <img src={banner.img} alt="bannerimg" />
        </div>)}       
