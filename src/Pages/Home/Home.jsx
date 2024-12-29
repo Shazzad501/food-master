@@ -2,6 +2,7 @@ import React from 'react';
 import Banner from './Banner';
 import FoodCategory from './FoodCategory';
 import PopulerMenu from './PopulerMenu';
+import FeaturedItem from './FeaturedItem';
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <Banner/>
       <FoodCategory/>
       <PopulerMenu/>
+      <FeaturedItem/>
     </div>
   );
 };

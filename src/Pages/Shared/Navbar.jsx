@@ -7,20 +7,20 @@ const Navbar = () => {
       to='/'
       className={({ isActive }) =>
         `hover:bg-transparent hover:border-b-2 bg-transparent font-bold text-base ${
-          isActive ? 'text-[#BB8506]' : ''
+          isActive ? 'text-[#ebd247]' : ''
         }`}
       >Home</NavLink></li>       
       <li><NavLink 
       to='/contact'
       className={({ isActive }) =>
         `hover:bg-transparent hover:border-b-2 bg-transparent font-bold text-base ${
-          isActive ? 'text-[#BB8506]' : ''
+          isActive ? 'text-[#ebd247]' : ''
         }`}
       >Contact Us</NavLink></li>
   </>
   return (
     <>
-      <div className="navbar bg-black bg-opacity-50 text-white fixed top-0 left-0 right-0 z-50">
+      <div className="navbar bg-black bg-opacity-55 text-white fixed top-0 left-0 right-0 z-50">
         <div className="navbar-start">
           <a className="btn bg-transparent hover:bg-transparent border-none text-xl text-white">Food Master</a>
         </div>
