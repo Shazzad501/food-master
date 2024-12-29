@@ -24,6 +24,11 @@ const PopulerMenu = () => {
           menu.map((item) => <MenuItem key={item._id} item={item}></MenuItem>)
         }
       </div>
+     <div className='flex items-center justify-center pt-8'>
+     <button className="bg-transparent border-b-4 border-gray-600 hover:text-white hover:bg-yellow-600 px-6 py-2 rounded-md text-sm font-semibold transition">
+              View Full Menu
+      </button>
+     </div>
     </section>
   );
 };

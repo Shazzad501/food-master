@@ -4,16 +4,20 @@ import FoodCategory from './FoodCategory';
 import PopulerMenu from './PopulerMenu';
 import FeaturedItem from './FeaturedItem';
 import Testimonial from './Testimonial';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   return (
-    <div>
+    <>
+      <Helmet>
+        <title>Food Master || Home</title>
+      </Helmet>
       <Banner/>
       <FoodCategory/>
       <PopulerMenu/>
       <FeaturedItem/>
       <Testimonial/>
-    </div>
+    </>
   );
 };
 

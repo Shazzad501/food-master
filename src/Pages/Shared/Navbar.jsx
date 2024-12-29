@@ -11,12 +11,12 @@ const Navbar = () => {
         }`}
       >Home</NavLink></li>       
       <li><NavLink 
-      to='/contact'
+      to='/menu'
       className={({ isActive }) =>
         `hover:bg-transparent hover:border-b-2 bg-transparent font-bold text-base ${
           isActive ? 'text-[#ebd247]' : ''
         }`}
-      >Contact Us</NavLink></li>
+      >Our Menu</NavLink></li>
   </>
   return (
     <>
