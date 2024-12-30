@@ -1,6 +1,7 @@
 import SectionHeader from '../../components/SectionHeader';
 import MenuItem from '../Shared/MenuItem';
 import useMenu from '../../hooks/useMenu';
+import { Link } from 'react-router-dom';
 
 const PopulerMenu = () => {
   const [menu] = useMenu()
@@ -17,9 +18,9 @@ const PopulerMenu = () => {
         }
       </div>
      <div className='flex items-center justify-center pt-8'>
-     <button className="bg-transparent border-b-4 border-gray-600 hover:text-white hover:bg-yellow-600 px-6 py-2 rounded-md text-sm font-semibold transition">
+     <Link to='/menu' className="bg-transparent border-b-4 border-gray-600 hover:text-white hover:bg-yellow-600 px-6 py-2 rounded-md text-sm font-semibold transition">
               View Full Menu
-      </button>
+      </Link>
      </div>
     </section>
   );

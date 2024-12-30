@@ -7,6 +7,7 @@ import Testimonial from './Testimonial';
 import { Helmet } from 'react-helmet-async';
 import Cover from '../Shared/Cover';
 import chefService from '../../assets/chef-service.jpg'
+import Recommends from './Recommends';
 const Home = () => {
   return (
     <>
@@ -19,6 +20,7 @@ const Home = () => {
      <Cover img={chefService} headline={'Food Master'} details={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem sapiente nulla doloribus eveniet. Libero explicabo asperiores nostrum.'}/>
      </div>
       <PopulerMenu/>
+      <Recommends/>
       <FeaturedItem/>
       <Testimonial/>
     </>

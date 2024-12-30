@@ -2,6 +2,7 @@ import MenuItem from '../Shared/MenuItem';
 import pizzaImg from '../../assets/pizza-bg.jpg'
 import Cover from '../Shared/Cover';
 import useMenu from '../../hooks/useMenu';
+import { Link } from 'react-router-dom';
 
 const FizzaMenu = () => {
   const [menu] = useMenu()
@@ -15,9 +16,9 @@ const FizzaMenu = () => {
         }
       </div>
      <div className='flex items-center justify-center pt-8'>
-     <button className="bg-transparent border-b-4 border-gray-600 hover:text-white hover:bg-yellow-600 px-6 py-2 rounded-md text-sm font-semibold transition">
+     <Link to='/order' className="bg-transparent border-b-4 border-gray-600 hover:text-white hover:bg-yellow-600 px-6 py-2 rounded-md text-sm font-semibold transition">
               Order Your Favorite Food
-      </button>
+      </Link>
      </div>
     </section>
   );

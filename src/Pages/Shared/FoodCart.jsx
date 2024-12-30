@@ -19,7 +19,7 @@ const FoodCart = ({food}) => {
       <div className="p-4">
         <h5 className="text-lg font-bold text-gray-800">{name}</h5>
         <p className="text-sm text-gray-600">{recipe}</p>
-        <button className="mt-4 w-full bg-yellow-500 text-white text-sm font-semibold py-2 rounded hover:bg-yellow-600">
+        <button className="mt-4 px-3 bg-transparent border-b-4 text-black hover:text-white text-sm font-semibold py-2 rounded hover:bg-yellow-600">
           ADD TO CART
         </button>
       </div>

@@ -7,14 +7,14 @@ import SectionHeader from "../../components/SectionHeader";
 import Rating from "react-rating";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { SiComma } from "react-icons/si";
+import axios from "axios";
 
 const Testimonial = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("/reviews.json")
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
+   axios.get('http://localhost:5000/review')
+   .then(res => setReviews(res.data))
   }, []);
 
   return (
