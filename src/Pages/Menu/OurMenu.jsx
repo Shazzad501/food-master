@@ -4,6 +4,8 @@ import Cover from '../Shared/Cover';
 import banner3 from '../../assets/banner3.jpg'
 import SectionHeader from '../../components/SectionHeader';
 import OfferMenu from './OfferMenu';
+import DessertMenu from './DessertMenu';
+import FizzaMenu from './FizzaMenu';
 
 const OurMenu = () => {
   return (
@@ -16,6 +18,8 @@ const OurMenu = () => {
       {/* menu */}
       <SectionHeader subTitle={`---Don't miss---`} title={"Today's Offer"}/>
       <OfferMenu/>
+      <DessertMenu/>
+      <FizzaMenu/>
     </div>
   );
 };
