@@ -6,6 +6,7 @@ import SectionHeader from '../../components/SectionHeader';
 import OfferMenu from './OfferMenu';
 import DessertMenu from './DessertMenu';
 import FizzaMenu from './FizzaMenu';
+import SaladMenu from './SaladMenu';
 
 const OurMenu = () => {
   return (
@@ -20,6 +21,7 @@ const OurMenu = () => {
       <OfferMenu/>
       <DessertMenu/>
       <FizzaMenu/>
+      <SaladMenu/>
     </div>
   );
 };
