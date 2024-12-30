@@ -17,6 +17,13 @@ const Navbar = () => {
           isActive ? 'text-[#ebd247]' : ''
         }`}
       >Our Menu</NavLink></li>
+      <li><NavLink 
+      to='/order'
+      className={({ isActive }) =>
+        `hover:bg-transparent hover:border-b-2 bg-transparent font-bold text-base ${
+          isActive ? 'text-[#ebd247]' : ''
+        }`}
+      >Order Food</NavLink></li>
   </>
   return (
     <>
