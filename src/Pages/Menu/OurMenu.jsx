@@ -7,6 +7,7 @@ import OfferMenu from './OfferMenu';
 import DessertMenu from './DessertMenu';
 import FizzaMenu from './FizzaMenu';
 import SaladMenu from './SaladMenu';
+import SoupMenu from './SoupMenu';
 
 const OurMenu = () => {
   return (
@@ -22,6 +23,7 @@ const OurMenu = () => {
       <DessertMenu/>
       <FizzaMenu/>
       <SaladMenu/>
+      <SoupMenu/>
     </div>
   );
 };
