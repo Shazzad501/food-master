@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from 'react';
 import MenuItem from '../Shared/MenuItem';
 import soupImg from '../../assets/soup-bg.jpg'
 import Cover from '../Shared/Cover';
+import useMenu from '../../hooks/useMenu';
 
 const SoupMenu = () => {
-  const [menu, setMenu] = useState([])
-
-  useEffect(()=>{
-    fetch('menu.json')
-    .then(res=> res.json())
-    .then(data=> {
-      const soupItem = data.filter(item=> item.category === 'soup')
-      setMenu(soupItem)
-    })
-  }, [])
+  const [menu] = useMenu()
+  const soupItem = menu.filter(item=> item.category === 'soup')
   return (
     <section className='max-w-7xl mx-auto mb-16'>
       <Cover img={soupImg} headline={'Soup'} details={' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore, consequatur.'}/>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
         {
-          menu.slice(0,6).map((item) => <MenuItem key={item._id} item={item}></MenuItem>)
+          soupItem.slice(0,6).map((item) => <MenuItem key={item._id} item={item}></MenuItem>)
         }
       </div>
      <div className='flex items-center justify-center pt-8'>

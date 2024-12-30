@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from 'react';
 import MenuItem from '../Shared/MenuItem';
+import useMenu from '../../hooks/useMenu';
 
 const OfferMenu = () => {
-  const [menu, setMenu] = useState([])
-
-  useEffect(()=>{
-    fetch('menu.json')
-    .then(res=> res.json())
-    .then(data=> {
-      const offeredItem = data.filter(item=> item.category === 'offered')
-      setMenu(offeredItem)
-    })
-  }, [])
+  const [menu] = useMenu()
+  const offeredItem = menu.filter(item=> item.category === 'offered')
   return (
     <section className='max-w-7xl mx-auto mb-16'>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
         {
-          menu.map((item) => <MenuItem key={item._id} item={item}></MenuItem>)
+          offeredItem.map((item) => <MenuItem key={item._id} item={item}></MenuItem>)
         }
       </div>
      <div className='flex items-center justify-center pt-8'>

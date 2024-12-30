@@ -2,24 +2,17 @@ import React, { useEffect, useState } from 'react';
 import MenuItem from '../Shared/MenuItem';
 import dessertImg from '../../assets/dessert-bg.jpeg'
 import Cover from '../Shared/Cover';
+import useMenu from '../../hooks/useMenu';
 
 const DessertMenu = () => {
-  const [menu, setMenu] = useState([])
-
-  useEffect(()=>{
-    fetch('menu.json')
-    .then(res=> res.json())
-    .then(data=> {
-      const dessertItem = data.filter(item=> item.category === 'dessert')
-      setMenu(dessertItem)
-    })
-  }, [])
+  const [menu] = useMenu()
+  const dessertItem = menu.filter(item=> item.category === 'dessert')
   return (
     <section className='max-w-7xl mx-auto mb-16'>
       <Cover img={dessertImg} headline={'Dessert'} details={' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore, consequatur.'}/>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
         {
-          menu.slice(0,6).map((item) => <MenuItem key={item._id} item={item}></MenuItem>)
+          dessertItem.slice(0,6).map((item) => <MenuItem key={item._id} item={item}></MenuItem>)
         }
       </div>
      <div className='flex items-center justify-center pt-8'>
