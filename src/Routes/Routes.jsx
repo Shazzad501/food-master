@@ -6,6 +6,7 @@ import Home from "../Pages/Home/Home";
 import OurMenu from "../Pages/Menu/OurMenu";
 import Error from "../Pages/Error";
 import Order from "../Pages/FoodOrder/Order";
+import Login from "../Pages/login/Login";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,12 @@ const router = createBrowserRouter([
       {
         path: 'order',
         element: <Order/>
+      },
+      {
+        path: 'login',
+        element: <Login/>
       }
+      
     ]
   },
 ]);

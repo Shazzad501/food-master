@@ -37,7 +37,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <Link className="btn bg-transparent hover:bg-transparent border-black text-white">Button</Link>
+          <Link to='/login' className="btn bg-transparent hover:bg-transparent border-black text-white">Login</Link>
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
