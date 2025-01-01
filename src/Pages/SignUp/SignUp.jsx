@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
-  const {register, handleSubmit, watch, formState: { errors },} = useForm()
+  const {register, handleSubmit,reset, formState: { errors },} = useForm()
   const {newUserSet, setUser, upDateProfile, setLoading, createUserWithGoogle} = useContext(AuthContext);
   const navigate = useNavigate()
 
@@ -25,16 +25,9 @@ const SignUp = () => {
       console.log(res.user)
       navigate(redirectPath)
       toast.success(`Sign Up success!!`)
-
+      console.log(res.user)
     // user profile updation
-      upDateProfile({displayName: data.name, photoURL: data.photoURL})
-      .then(()=>{
-        setLoading(false)
-      })
-      .catch((err)=>{
-        toast.error(`${err.message}`)
-      })
-
+     return upDateProfile(data.name, data.photoURL)
     })
     .catch(err => toast.error(`${err.message}`))
   }

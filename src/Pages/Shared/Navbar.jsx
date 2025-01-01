@@ -57,11 +57,11 @@ const Navbar = () => {
         {
           user?<>
           <div 
-           title={user && user?.displayName}
+           title={user?.displayName}
           className='rounded-full h-12 w-12 border-2 overflow-hidden'>
              <img 
             className="w-full h-full object-cover"
-            src={user && user?.photoURL} 
+            src={user?.photoURL} 
             alt="user img" />
           </div>
           <button onClick={handleLogOut} className="hidden lg:flex btn font-bold text-base bg-transparent hover:bg-transparent border-gray-300 ml-2 text-white">Log out</button>

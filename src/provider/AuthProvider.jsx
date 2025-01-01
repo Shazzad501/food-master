@@ -1,6 +1,7 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext()
 const AuthProvider = ({children}) => {
@@ -36,9 +37,14 @@ const AuthProvider = ({children}) => {
   }
 
     // update user profile
-    const upDateProfile=(upDateData)=>{
+    const upDateProfile=(name, photoURL)=>{
       setLoading(false);
-      return updateProfile(auth.currentUser, upDateData)
+      if(auth.currentUser){
+        return updateProfile(auth.currentUser, {displayName: name, photoURL: photoURL})
+      }
+      else{
+        toast.error('No user is currently signed in.')
+      }
     }
 
 
