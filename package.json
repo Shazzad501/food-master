@@ -26,6 +26,7 @@
     "react-simple-captcha": "^9.3.1",
     "react-tabs": "^6.1.0",
     "sort-by": "^1.2.0",
+    "sweetalert2": "^11.15.3",
     "swiper": "^11.1.15"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
+import { FaBars, FaShoppingCart } from 'react-icons/fa';
 
 const Navbar = () => {
   const {user, logoutUser} = useContext(AuthContext);
@@ -40,7 +41,7 @@ const Navbar = () => {
 
       {
       user && <li><Link to='' onClick={handleLogOut} className="lg:hidden">Log out</Link></li>
-     }
+     }  
   </>
   return (
     <>
@@ -53,7 +54,13 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end flex gap-3">
+        <p>
+          <Link className='text-yellow-500 font-bold text-xl flex'>
+              <FaShoppingCart/>
+              <span className='text-white -mt-3 text-base font-thin'>+0</span>
+        </Link>
+        </p>
         {
           user?<>
           <div 
@@ -64,25 +71,14 @@ const Navbar = () => {
             src={user?.photoURL} 
             alt="user img" />
           </div>
-          <button onClick={handleLogOut} className="hidden lg:flex btn font-bold text-base bg-transparent hover:bg-transparent border-gray-300 ml-2 text-white">Log out</button>
+          <button onClick={handleLogOut} className="hidden lg:flex btn font-bold text-base bg-transparent hover:bg-transparent border-gray-300 text-white">Log out</button>
           </>:<>
           <Link to='/login' className={`btn font-bold text-base bg-transparent  text-white hover:bg-transparent`}>Login</Link>
           </>
         }
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16" />
-              </svg>
+            <div tabIndex={0} role="button" className="lg:hidden">
+              <p className='font-thin text-3xl text-white'><FaBars></FaBars></p>
             </div>
             <ul
               tabIndex={0}
