@@ -1,27 +1,58 @@
 import loginImg from '../../assets/authentication2.png'
 import bgImg from '../../assets/authentication.png'
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
-
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { AuthContext } from '../../provider/AuthProvider';
+import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Login = () => {
+  const {setUser, loginUser, createUserWithGoogle} = useContext(AuthContext)
+  const navigate = useNavigate()
   const [disable, setDisable] = useState(true)
   const captchaRef = useRef(null)
+
+    // redirect path
+    const redirectPath = location?.state?.from?.pathname || '/';
 
   useEffect(()=>{
     loadCaptchaEnginge(6);
   }, [])
 
+  // handle login function
   const handleLogin = (e) =>{
     e.preventDefault();
 
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const loginData = {email, password}
-    console.log(loginData)
+   
+    loginUser(email, password)
+      .then(res=>{
+        setUser(res.user);
+        toast.success("Login Success!!")
+        navigate(redirectPath)
+        // Reset the form fields after successful login
+        e.target.reset();
+      })
+      .catch(err=>{
+        toast.error(`${err.message}!!`)
+      })
   }
 
+  // handle google login function
+  const handleGoogleLogin=()=>{
+    createUserWithGoogle()
+    .then(res=>{
+      setUser(res.user);
+      toast.success("Login Success!!")
+      navigate(redirectPath)
+    })
+    .catch(err=> toast.error(`${err.message}`))
+  }
+
+  // captcha validation
   const handleValidateCaptcha = () =>{
     const user_captcha_value = captchaRef.current.value;
     if(validateCaptcha(user_captcha_value)){
@@ -36,6 +67,9 @@ const Login = () => {
     className="flex items-center justify-center h-screen bg-cover bg-center"
     style={{ backgroundImage: `url(${bgImg})` }}
   >
+    <Helmet>
+      <title>Food Master || Login</title>
+    </Helmet>
     <div
     style={{ backgroundImage: `url(${bgImg})` }} 
     className="w-full max-w-4xl shadow-md rounded-md flex flex-col md:flex-row overflow-hidden">
@@ -96,16 +130,18 @@ const Login = () => {
 
         <p className="text-center mt-4 text-sm text-gray-500">
           New here?{" "}
-          <a href="#" className="text-orange-400 hover:underline">
+          <Link to='/signup' className="text-orange-400 hover:underline">
             Create a New Account
-          </a>
+          </Link>
         </p>
 
         <div className="flex justify-center mt-4 space-x-4">
           <button className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300">
             <FaFacebook/>
           </button>
-          <button className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300">
+          <button
+          onClick={handleGoogleLogin}
+          className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300">
             <FaGoogle/>
           </button>
           <button className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300">

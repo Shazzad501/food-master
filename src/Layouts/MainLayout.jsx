@@ -4,12 +4,12 @@ import Navbar from "../Pages/Shared/Navbar";
 
 const MainLayout = () => {
   const location = useLocation()
-  const loginPage = location.pathname.includes('login')
+  const loginSingUpPage = location.pathname.includes('login') || location.pathname.includes('signup')
   return (
     <div>
-      { loginPage || <Navbar/>}
+      { loginSingUpPage || <Navbar/>}
       <Outlet></Outlet>
-      { loginPage || <Footer/>}
+      { loginSingUpPage || <Footer/>}
     </div>
   );
 };

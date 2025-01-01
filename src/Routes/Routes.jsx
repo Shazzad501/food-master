@@ -7,6 +7,7 @@ import OurMenu from "../Pages/Menu/OurMenu";
 import Error from "../Pages/Error";
 import Order from "../Pages/FoodOrder/Order";
 import Login from "../Pages/login/Login";
+import SignUp from "../Pages/SignUp/SignUp";
 
 const router = createBrowserRouter([
   {
@@ -29,8 +30,11 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login/>
+      },
+      {
+        path: 'signup',
+        element: <SignUp/>
       }
-      
     ]
   },
 ]);
