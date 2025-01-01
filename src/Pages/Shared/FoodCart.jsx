@@ -1,14 +1,17 @@
 import { replace, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import axios from "axios";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useCart from "../../hooks/useCart";
 
 const FoodCart = ({food}) => {
   const {image, name, recipe, price} = food || {}
   const {user} = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
+  const axiosSecure = useAxiosSecure()
+  const [, refetch] = useCart()
 
 
   // handle add to cart
@@ -23,9 +26,13 @@ const FoodCart = ({food}) => {
         image: item.image
       }
 
-      axios.post('http://localhost:5000/carts', menuItem)
-      .then(()=>{
-        toast.success("Item add to cart")
+      axiosSecure.post('/carts', menuItem)
+      .then((res)=>{
+        if(res.data.insertedId){
+          toast.success("Item add to cart")
+          // refetch data to show in cart icon
+          refetch();
+        }
       })
       .catch((err)=>{
         toast.error(`${err.message}`)

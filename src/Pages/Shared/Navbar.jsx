@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import { FaBars, FaShoppingCart } from 'react-icons/fa';
+import useCart from '../../hooks/useCart';
 
 const Navbar = () => {
   const {user, logoutUser} = useContext(AuthContext);
+  const [cart] = useCart();
 
   const handleLogOut = ()=>{
     logoutUser()
@@ -56,9 +58,10 @@ const Navbar = () => {
         </div>
         <div className="navbar-end flex gap-3">
         <p>
-          <Link className='text-yellow-500 font-bold text-xl flex'>
+          <Link className='text-yellow-500 font-bold text-xl flex gap-1'>
               <FaShoppingCart/>
-              <span className='text-white -mt-3 text-base font-thin'>+0</span>
+              <span className='-mt-3'>
+                <span className='bg-white rounded-full text-black text-base font-normal px-2'>{cart.length}</span></span>
         </Link>
         </p>
         {
