@@ -58,7 +58,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end flex gap-3">
         <p>
-          <Link className='text-yellow-500 font-bold text-xl flex gap-1'>
+          <Link to='/dashboard/cart' className='text-yellow-500 font-bold text-xl flex gap-1'>
               <FaShoppingCart/>
               <span className='-mt-3'>
                 <span className='bg-white rounded-full text-black text-base font-normal px-2'>{cart.length}</span></span>
