@@ -7,12 +7,14 @@ import { Helmet } from 'react-helmet-async';
 import { AuthContext } from '../../provider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const Login = () => {
   const {setUser, loginUser, createUserWithGoogle} = useContext(AuthContext)
   const navigate = useNavigate()
   const [disable, setDisable] = useState(true)
   const captchaRef = useRef(null)
+  const axiosPublic = useAxiosPublic()
 
     // redirect path
     const redirectPath = location?.state?.from?.pathname || '/';
@@ -46,6 +48,14 @@ const Login = () => {
     createUserWithGoogle()
     .then(res=>{
       setUser(res.user);
+      const myUser={
+        name: res.user?.displayName,
+        email: res.user?.email,
+        photo: res.user?.photoURL
+      }
+      // save user into the db
+      axiosPublic.post('/users', myUser)
+      .catch(err=>toast.error(`${err.message}`))
       toast.success("Login Success!!")
       navigate(redirectPath)
     })

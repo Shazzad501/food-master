@@ -47,15 +47,25 @@ const SignUp = () => {
 
 
   // handle google login function
-  // const handleGoogleLogin=()=>{
-  //   createUserWithGoogle()
-  //   .then(res=>{
-  //     setUser(res.user);
-  //     toast.success("Login Success!!")
-  //     navigate(redirectPath)
-  //   })
-  //   .catch(err=> toast.error(`${err.message}`))
-  // }
+  const handleGoogleLogin=()=>{
+    createUserWithGoogle()
+    .then(res=>{
+      setUser(res.user);
+      const myUser = {
+        name: res.user?.displayName,
+        email: res.user?.email,
+        photo: res.user?.photoURL
+      }
+      // save user into the db
+      axiosPublic.post('/users', myUser)
+      .catch(err=>{
+        toast.err(`${err.message}`)
+      })
+      toast.success("Login Success!!")
+      navigate(redirectPath)
+    })
+    .catch(err=> toast.error(`${err.message}`))
+  }
 
   return (
     <div className="py-12" style={{ backgroundImage: `url(${bgImg})` }}>
@@ -146,7 +156,7 @@ const SignUp = () => {
               </Link>
             </p>
 
-            {/* <div className="text-center mt-6 text-gray-500">Or sign up with</div>
+            <div className="text-center mt-6 text-gray-500">Or sign up with</div>
 
             <div className="flex justify-center mt-4 space-x-4">
               <button className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300">
@@ -158,7 +168,7 @@ const SignUp = () => {
               <button className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300">
                 <FaGithub />
               </button>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
