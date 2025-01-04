@@ -36,7 +36,7 @@ const Dashboard = () => {
 
         </ul>
       </aside>
-      <div className='flex-1'>
+      <div className='flex-1 px-5 py-10 bg-base-200'>
         <Outlet></Outlet>
       </div>
     </div>

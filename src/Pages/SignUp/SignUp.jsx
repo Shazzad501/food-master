@@ -7,8 +7,10 @@ import { AuthContext } from "../../provider/AuthProvider";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
+  const axiosPublic = useAxiosPublic()
   const {register, handleSubmit,reset, formState: { errors },} = useForm()
   const {newUserSet, setUser, upDateProfile, setLoading, createUserWithGoogle} = useContext(AuthContext);
   const navigate = useNavigate()
@@ -22,10 +24,21 @@ const SignUp = () => {
     newUserSet(data.email, data.password)
     .then(res => {
       setUser(res.user);
-      console.log(res.user)
-      navigate(redirectPath)
-      toast.success(`Sign Up success!!`)
-      console.log(res.user)
+      // save user into the db
+      const myUser= {
+        name: data.name,
+        email: data.email,
+        photo: data.photoURL
+      }
+      axiosPublic.post('/users', myUser)
+      .then(res=>{
+        if(res.data.insertedId){
+          navigate(redirectPath)
+          toast.success(`Sign Up success!!`)
+          reset()
+        }
+      })
+      .catch(err=> toast.error(`${err.message}`))   
     // user profile updation
      return upDateProfile(data.name, data.photoURL)
     })
@@ -34,15 +47,15 @@ const SignUp = () => {
 
 
   // handle google login function
-  const handleGoogleLogin=()=>{
-    createUserWithGoogle()
-    .then(res=>{
-      setUser(res.user);
-      toast.success("Login Success!!")
-      navigate(redirectPath)
-    })
-    .catch(err=> toast.error(`${err.message}`))
-  }
+  // const handleGoogleLogin=()=>{
+  //   createUserWithGoogle()
+  //   .then(res=>{
+  //     setUser(res.user);
+  //     toast.success("Login Success!!")
+  //     navigate(redirectPath)
+  //   })
+  //   .catch(err=> toast.error(`${err.message}`))
+  // }
 
   return (
     <div className="py-12" style={{ backgroundImage: `url(${bgImg})` }}>
@@ -133,7 +146,7 @@ const SignUp = () => {
               </Link>
             </p>
 
-            <div className="text-center mt-6 text-gray-500">Or sign up with</div>
+            {/* <div className="text-center mt-6 text-gray-500">Or sign up with</div>
 
             <div className="flex justify-center mt-4 space-x-4">
               <button className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300">
@@ -145,7 +158,7 @@ const SignUp = () => {
               <button className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300">
                 <FaGithub />
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

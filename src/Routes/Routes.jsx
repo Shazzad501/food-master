@@ -42,12 +42,12 @@ const router = createBrowserRouter([
   },
   {
     path: 'dashboard',
-    element: <Dashboard/>,
+    element:<Dashboard/>,
     errorElement: <Error/>,
     children:[
       {
         path: 'cart',
-        element: <Cart/>
+        element: <PrivateRoute><Cart/></PrivateRoute>
       }
     ]
   }
