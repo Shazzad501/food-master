@@ -4,10 +4,12 @@ import { useQuery } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet-async';
 import { FaTrashAlt, FaUsers } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure()
 
+  // fatch user data by 10stack query
   const {data: users=[], refetch}= useQuery({
     queryKey: ['users'],
     queryFn: async()=>{
@@ -16,25 +18,37 @@ const AllUsers = () => {
     }
   })
 
+  // hadle make admin
+  const handleMakeAdmin = (user) =>{
+    axiosSecure.patch(`/users/admin/${user._id}`)
+    .then(res=>{
+      if(res.data.modifiedCount>0){
+        toast.success(`Now ${user.name} is admin this site!!`)
+        refetch()
+      }
+    })
+    .catch(err=> toast.error(`${err.message}`))
+  }
+
   // handle use delete
-  const handleDeleteUser = (id)=>{
+  const handleDeleteUser = (user)=>{
     Swal.fire({
       title: "Are you sure?😯",
-      text: "You won't be delete this cart!💁‍♂️💁‍♂️",
+      text: "You won't be delete this user!💁‍♂️💁‍♂️",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete user!"
     }).then((result) => {
       if (result.isConfirmed) {
 
-        axiosSecure.delete(`/users/${id}`)
+        axiosSecure.delete(`/users/${user._id}`)
         .then(res=>{
           if(res.data.deletedCount>0){
             Swal.fire({
               title: "Deleted!",
-              text: "Your cart has been deleted.",
+              text: `${user.name} has been deleted!`,
               icon: "success"
             });
             // refacth data 
@@ -90,10 +104,12 @@ const AllUsers = () => {
                   </td>
                   <td><span className='font-bold text-base'>{user.email}</span></td>
                   <th>
-                    <button  className="btn btn-sm text-orange-500 bg-white font-bold text-base"><FaUsers/></button>
+                    {
+                      user.role === 'admin' ? <button className='btn btn-sm font-bold text-base text-orange-500'>Admin</button> : <button onClick={()=>handleMakeAdmin(user)}  className="btn btn-sm text-orange-500 bg-white font-bold text-base"><FaUsers/></button>
+                    }
                   </th>
                   <th>
-                    <button onClick={()=> handleDeleteUser(user._id)}  className="btn btn-sm text-red-600 bg-white font-bold text-base"><FaTrashAlt/></button>
+                    <button onClick={()=> handleDeleteUser(user)}  className="btn btn-sm text-red-600 bg-white font-bold text-base"><FaTrashAlt/></button>
                   </th>
                 </tr>)
               }
