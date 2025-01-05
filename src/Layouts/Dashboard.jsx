@@ -3,10 +3,11 @@ import { Helmet } from 'react-helmet-async';
 import { FaCalendar, FaCommentDots, FaEnvelope, FaHome, FaList, FaSearch, FaShoppingCart, FaStreetView, FaUsers, FaUtensils, FaWallet } from 'react-icons/fa';
 import { FaBookBookmark } from 'react-icons/fa6';
 import { NavLink, Outlet } from 'react-router-dom';
+import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
   // TODO: load admin data into the db
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   return (
     <div className='flex max-w-7xl mx-auto gap-5'>
       <Helmet>

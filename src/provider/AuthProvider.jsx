@@ -2,11 +2,14 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 export const AuthContext = createContext()
 const AuthProvider = ({children}) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const axiosPublic = useAxiosPublic()
 
   // create googleProvider
   const googleProvider = new GoogleAuthProvider()
@@ -52,12 +55,44 @@ const AuthProvider = ({children}) => {
   useEffect(()=>{
     const unSubscribe = onAuthStateChanged(auth, (currentUser)=>{
       setUser(currentUser);
+      // jsonWebToken load
+      if(currentUser){
+        // user info
+        const userInfo = {email: currentUser.email}
+        axiosPublic.post('/jwt', userInfo)
+        .then(res=>{
+          if(res.data.token){
+            localStorage.setItem('access-token', res.data.token)
+            // token accept popup
+            // Swal.fire({
+            //   title: "Accept all cookie!!",
+            //   showClass: {
+            //     popup: `
+            //       animate__animated
+            //       animate__fadeInUp
+            //       animate__faster
+            //     `
+            //   },
+            //   hideClass: {
+            //     popup: `
+            //       animate__animated
+            //       animate__fadeOutDown
+            //       animate__faster
+            //     `
+            //   }
+            // });
+          }
+        })
+      }
+      else{
+        localStorage.removeItem('access-token')
+      }
       setLoading(false)
     })
     return()=>{
       unSubscribe();
     }
-  }, [setUser, setLoading])
+  }, [axiosPublic])
 
   const authInfo={
     createUserWithGoogle,
