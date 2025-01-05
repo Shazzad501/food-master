@@ -3,16 +3,48 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet-async';
 import { FaTrashAlt, FaUsers } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure()
-  const {data: users=[]}= useQuery({
+
+  const {data: users=[], refetch}= useQuery({
     queryKey: ['users'],
     queryFn: async()=>{
       const res = await axiosSecure.get('/users');
       return res.data;
     }
   })
+
+  // handle use delete
+  const handleDeleteUser = (id)=>{
+    Swal.fire({
+      title: "Are you sure?😯",
+      text: "You won't be delete this cart!💁‍♂️💁‍♂️",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        axiosSecure.delete(`/users/${id}`)
+        .then(res=>{
+          if(res.data.deletedCount>0){
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your cart has been deleted.",
+              icon: "success"
+            });
+            // refacth data 
+            refetch();
+          }
+        })
+        .catch(err=> toast.error(`${err.message}`))
+      }
+    });
+  }
   return (
     <div>
       <Helmet><title>Food Master || Users</title></Helmet>
@@ -32,7 +64,7 @@ const AllUsers = () => {
                 <th>User Image</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Roll</th>
+                <th>Role</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -61,7 +93,7 @@ const AllUsers = () => {
                     <button  className="btn btn-sm text-orange-500 bg-white font-bold text-base"><FaUsers/></button>
                   </th>
                   <th>
-                    <button  className="btn btn-sm text-red-600 bg-white font-bold text-base"><FaTrashAlt/></button>
+                    <button onClick={()=> handleDeleteUser(user._id)}  className="btn btn-sm text-red-600 bg-white font-bold text-base"><FaTrashAlt/></button>
                   </th>
                 </tr>)
               }
@@ -70,7 +102,6 @@ const AllUsers = () => {
           </table>
         </div>
       </div>  
-      {/* onClick={()=> handleDelete(item._id)} */}
     </div>
   );
 };
