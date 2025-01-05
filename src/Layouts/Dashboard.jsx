@@ -1,10 +1,12 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { FaCalendar, FaCommentDots, FaHome, FaList, FaSearch, FaShoppingCart, FaStreetView, FaWallet } from 'react-icons/fa';
+import { FaCalendar, FaCommentDots, FaEnvelope, FaHome, FaList, FaSearch, FaShoppingCart, FaStreetView, FaUsers, FaUtensils, FaWallet } from 'react-icons/fa';
 import { FaBookBookmark } from 'react-icons/fa6';
 import { NavLink, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
+  // TODO: load admin data into the db
+  const isAdmin = true;
   return (
     <div className='flex max-w-7xl mx-auto gap-5'>
       <Helmet>
@@ -16,23 +18,45 @@ const Dashboard = () => {
           <p className='font-bold text-base text-black'>Restaurent</p>
         </div>
         <ul className='menu'>
-          <li><NavLink to='/dashboard/user-home' className='font-bold text-base'><span className='font-bold text-lg'><FaHome/></span> User Home</NavLink></li>
+          {
+            isAdmin 
+            ? 
+            <>
+            <li><NavLink to='/dashboard/admin-home' className='font-bold text-base'><span className='font-bold text-lg'><FaHome/></span> Admin Home</NavLink></li>
 
-          <li><NavLink to='/dashboard/reservation' className='font-bold text-base'><span className='font-bold text-lg'><FaCalendar/></span> Reservation</NavLink></li>
+            <li><NavLink to='/dashboard/addItems' className='font-bold text-base'><span className='font-bold text-lg'><FaUtensils/></span>Add Items</NavLink></li>
 
-          <li><NavLink to='/dashboard/payment' className='font-bold text-base'><span className='font-bold text-lg'><FaWallet/></span> Payment History</NavLink></li>
+            <li><NavLink to='/dashboard/manageItem' className='font-bold text-base'><span className='font-bold text-lg'><FaList/></span>Manage Items</NavLink></li>
 
-          <li><NavLink to='/dashboard/cart' className='font-bold text-base'><span className='font-bold text-lg'><FaShoppingCart/></span> My Cart</NavLink></li>
+            <li><NavLink to='/dashboard/bookigs' className='font-bold text-base'><span className='font-bold text-lg'><FaBookBookmark/></span> Manage Bookings</NavLink></li>
 
-          <li><NavLink to='/dashboard/review' className='font-bold text-base'><span className='font-bold text-lg'><FaCommentDots/></span> Add Review</NavLink></li>
+            <li><NavLink to='/dashboard/all-users' className='font-bold text-base'><span className='font-bold text-lg'><FaUsers/></span> All Users</NavLink></li>
 
-          <li><NavLink to='/dashboard/booking' className='font-bold text-base'><span className='font-bold text-lg'><FaList/></span> My Booking</NavLink></li>
+            </> 
+            : 
+            <>
+            <li><NavLink to='/dashboard/user-home' className='font-bold text-base'><span className='font-bold text-lg'><FaHome/></span> User Home</NavLink></li>
+
+            <li><NavLink to='/dashboard/reservation' className='font-bold text-base'><span className='font-bold text-lg'><FaCalendar/></span> Reservation</NavLink></li>
+
+            <li><NavLink to='/dashboard/payment' className='font-bold text-base'><span className='font-bold text-lg'><FaWallet/></span> Payment History</NavLink></li>
+
+            <li><NavLink to='/dashboard/cart' className='font-bold text-base'><span className='font-bold text-lg'><FaShoppingCart/></span> My Cart</NavLink></li>
+
+            <li><NavLink to='/dashboard/review' className='font-bold text-base'><span className='font-bold text-lg'><FaCommentDots/></span> Add Review</NavLink></li>
+
+            <li><NavLink to='/dashboard/booking' className='font-bold text-base'><span className='font-bold text-lg'><FaList/></span> My Booking</NavLink></li>
+            </>
+          }
 
           <div className='divider'></div>
+          {/* shared link */}
 
           <li><NavLink to='/' className='font-bold text-base'><span className='font-bold text-lg'><FaHome/></span>Home</NavLink></li>
 
           <li><NavLink to='/order' className='font-bold text-base'><span className='font-bold text-lg'><FaSearch/></span>Menu</NavLink></li>
+
+          <li><NavLink to='/contact' className='font-bold text-base'><span className='font-bold text-lg'><FaEnvelope/></span>Contact</NavLink></li>
 
         </ul>
       </aside>
