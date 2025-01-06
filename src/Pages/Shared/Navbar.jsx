@@ -42,8 +42,18 @@ const Navbar = () => {
       >Order Food</NavLink></li>
 
       {
+        user && <li><NavLink 
+        to='/dashboard'
+        className={({ isActive }) =>
+          `hover:bg-transparent hover:border-b-2 bg-transparent font-bold ${
+            isActive ? 'text-white' : 'text-[#ebd247]'
+          }`}
+        >Dashboard</NavLink></li>
+      }
+
+      {
       user && <li><Link to='' onClick={handleLogOut} className="lg:hidden">Log out</Link></li>
-     }  
+     }   
   </>
   return (
     <>

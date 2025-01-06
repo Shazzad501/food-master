@@ -25,7 +25,7 @@ const Dashboard = () => {
             <>
             <li><NavLink to='/dashboard/admin-home' className='font-bold text-base'><span className='font-bold text-lg'><FaHome/></span> Admin Home</NavLink></li>
 
-            <li><NavLink to='/dashboard/addItems' className='font-bold text-base'><span className='font-bold text-lg'><FaUtensils/></span>Add Items</NavLink></li>
+            <li><NavLink to='/dashboard/add-item' className='font-bold text-base'><span className='font-bold text-lg'><FaUtensils/></span>Add Items</NavLink></li>
 
             <li><NavLink to='/dashboard/manageItem' className='font-bold text-base'><span className='font-bold text-lg'><FaList/></span>Manage Items</NavLink></li>
 

@@ -13,7 +13,8 @@ const Cart = () => {
   const axiosSecure = useAxiosSecure()
 
   // calculate total price
-  const totalPrice = cart.reduce((sum, item)=> sum + item.price, 0)
+  const price = cart.reduce((sum, item)=> sum + item.price, 0)
+  const totalPrice = price.toFixed(2);
 
   const handleDelete = (id)=>{
     Swal.fire({
