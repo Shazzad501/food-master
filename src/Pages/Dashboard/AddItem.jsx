@@ -19,7 +19,6 @@ const AddItem = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    // console.log("Form Data:", data);
 
     // img upload on imgbb and get an url
     const imgFile = {image: data.image[0]};
@@ -120,7 +119,7 @@ const AddItem = () => {
               <label className="block text-black mb-2 font-bold text-base">Price</label>
               <input
                 type="number"
-                step="1"
+                step="0.01"
                 placeholder="Price"
                 {...register("price", {
                   required: "Price is required",
