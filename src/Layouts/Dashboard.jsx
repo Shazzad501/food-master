@@ -4,10 +4,12 @@ import { FaCalendar, FaCommentDots, FaEnvelope, FaHome, FaList, FaSearch, FaShop
 import { FaBookBookmark } from 'react-icons/fa6';
 import { NavLink, Outlet } from 'react-router-dom';
 import useAdmin from '../hooks/useAdmin';
+import useCart from '../hooks/useCart';
 
 const Dashboard = () => {
   // TODO: load admin data into the db
   const [isAdmin] = useAdmin();
+  const [cart] = useCart()
   return (
     <div className='flex max-w-7xl mx-auto gap-5'>
       <Helmet>
@@ -42,7 +44,7 @@ const Dashboard = () => {
 
             <li><NavLink to='/dashboard/payment-history' className='font-bold text-base'><span className='font-bold text-lg'><FaWallet/></span> Payment History</NavLink></li>
 
-            <li><NavLink to='/dashboard/cart' className='font-bold text-base'><span className='font-bold text-lg'><FaShoppingCart/></span> My Cart</NavLink></li>
+            <li><NavLink to='/dashboard/cart' className='font-bold text-base'><span className='font-bold text-lg'><FaShoppingCart/></span> My Cart ({cart.length})</NavLink></li>
 
             <li><NavLink to='/dashboard/review' className='font-bold text-base'><span className='font-bold text-lg'><FaCommentDots/></span> Add Review</NavLink></li>
 

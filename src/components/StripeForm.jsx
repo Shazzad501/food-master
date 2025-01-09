@@ -15,16 +15,19 @@ const StripeForm = () => {
   const [err, setErr] = useState('')
   // user axios secure
   const axiosSecure = useAxiosSecure();
-  const [cart] = useCart()
+  const [cart, refacth] = useCart()
   // calculate total price 
   const totalPrice = cart.reduce((total, item) => total + item.price, 0)
 
   useEffect(()=>{
-    axiosSecure.post('/create-payment-intent', {price: totalPrice})
+    if(totalPrice > 0){
+      axiosSecure.post('/create-payment-intent', {price: totalPrice})
     .then(res =>{
       setClientSecret(res.data.clientSecret)
-    })
-  }, [])
+    });
+    }
+    
+  }, [axiosSecure, totalPrice])
 
   const handleSubmit= async(event)=>{
     event.preventDefault();
@@ -78,13 +81,17 @@ const StripeForm = () => {
           email: user?.email,
           transactionId: paymentIntent.id,
           date: new Date(), //obisuly convert in uts date
-          cartId: cart.map(item=> item._id),
-          menuItemId: cart.map(item=> item.menuId),
+          cartIds: cart.map(item=> item._id),
+          menuItemIds: cart.map(item=> item.menuId),
           status: 'pending'
         }
 
         const res = await axiosSecure.post('/payments', payment)
-        console.log(res.data)
+        
+        if(res?.data?.paymetResult?.insertedId){
+          toast.success('Payment success')
+          refacth();
+        }
       }
     }
   }
