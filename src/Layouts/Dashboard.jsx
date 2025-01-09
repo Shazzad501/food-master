@@ -38,9 +38,9 @@ const Dashboard = () => {
             <>
             <li><NavLink to='/dashboard/user-home' className='font-bold text-base'><span className='font-bold text-lg'><FaHome/></span> User Home</NavLink></li>
 
-            <li><NavLink to='/dashboard/reservation' className='font-bold text-base'><span className='font-bold text-lg'><FaCalendar/></span> Reservation</NavLink></li>
+            <li><NavLink to='/dashboard/payment' className='font-bold text-base'><span className='font-bold text-lg'><FaCalendar/></span> Reservation</NavLink></li>
 
-            <li><NavLink to='/dashboard/payment' className='font-bold text-base'><span className='font-bold text-lg'><FaWallet/></span> Payment History</NavLink></li>
+            <li><NavLink to='/dashboard/payment-history' className='font-bold text-base'><span className='font-bold text-lg'><FaWallet/></span> Payment History</NavLink></li>
 
             <li><NavLink to='/dashboard/cart' className='font-bold text-base'><span className='font-bold text-lg'><FaShoppingCart/></span> My Cart</NavLink></li>
 
