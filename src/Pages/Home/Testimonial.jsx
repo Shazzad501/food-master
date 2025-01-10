@@ -13,7 +13,7 @@ const Testimonial = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-   axios.get('http://localhost:5000/review')
+   axios.get('https://food-master-server.vercel.app/review')
    .then(res => setReviews(res.data))
   }, []);
 

@@ -31,24 +31,22 @@ const Dashboard = () => {
 
             <li><NavLink to='/dashboard/manage-item' className='font-bold text-base'><span className='font-bold text-lg'><FaList/></span>Manage Items</NavLink></li>
 
-            <li><NavLink to='/dashboard/bookigs' className='font-bold text-base'><span className='font-bold text-lg'><FaBookBookmark/></span> Manage Bookings</NavLink></li>
+            {/* <li><NavLink to='/dashboard/bookigs' className='font-bold text-base'><span className='font-bold text-lg'><FaBookBookmark/></span> Manage Bookings</NavLink></li> */}
 
             <li><NavLink to='/dashboard/all-users' className='font-bold text-base'><span className='font-bold text-lg'><FaUsers/></span> All Users</NavLink></li>
 
             </> 
             : 
             <>
-            <li><NavLink to='/dashboard/user-home' className='font-bold text-base'><span className='font-bold text-lg'><FaHome/></span> User Home</NavLink></li>
-
-            <li><NavLink to='/dashboard/payment' className='font-bold text-base'><span className='font-bold text-lg'><FaCalendar/></span> Reservation</NavLink></li>
+            <li><NavLink to='/dashboard/payment' className='font-bold text-base'><span className='font-bold text-lg'><FaCalendar/></span> Payment</NavLink></li>
 
             <li><NavLink to='/dashboard/payment-history' className='font-bold text-base'><span className='font-bold text-lg'><FaWallet/></span> Payment History</NavLink></li>
 
             <li><NavLink to='/dashboard/cart' className='font-bold text-base'><span className='font-bold text-lg'><FaShoppingCart/></span> My Cart ({cart.length})</NavLink></li>
 
-            <li><NavLink to='/dashboard/review' className='font-bold text-base'><span className='font-bold text-lg'><FaCommentDots/></span> Add Review</NavLink></li>
+            {/* <li><NavLink to='/dashboard/review' className='font-bold text-base'><span className='font-bold text-lg'><FaCommentDots/></span> Add Review</NavLink></li> */}
 
-            <li><NavLink to='/dashboard/booking' className='font-bold text-base'><span className='font-bold text-lg'><FaList/></span> My Booking</NavLink></li>
+            {/* <li><NavLink to='/dashboard/booking' className='font-bold text-base'><span className='font-bold text-lg'><FaList/></span> My Booking</NavLink></li> */}
             </>
           }
 

@@ -8,7 +8,7 @@ const useMenu = () => {
   // const [menu, setMenu] = useState([])
 
   // useEffect(()=>{
-  //   axios.get('http://localhost:5000/menu')
+  //   axios.get('https://food-master-server.vercel.app/menu')
   //   .then(res => setMenu(res.data))
   // }, [])
 
