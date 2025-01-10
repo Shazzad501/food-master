@@ -54,7 +54,7 @@ const StripeForm = () => {
       setErr(error.message)
     }
     else{
-      console.log('Paymet Method', paymentMethod)
+      // console.log('Paymet Method', paymentMethod)
       setErr('')
     }
 

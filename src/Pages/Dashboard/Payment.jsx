@@ -9,7 +9,7 @@ import StripeForm from "../../components/StripeForm";
 const stripePromis = loadStripe(import.meta.env.VITE_Payment_Gateway_Key) 
 
 const Payment = () => {
-  console.log(stripePromis)
+  // console.log(stripePromis)
   return (
     <div>
       <Helmet><title>Food Master || Payment</title></Helmet>
