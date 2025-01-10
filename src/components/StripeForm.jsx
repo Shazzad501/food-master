@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useCart from "../hooks/useCart";
 import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const StripeForm = () => {
   const stripe = useStripe()
@@ -16,6 +17,7 @@ const StripeForm = () => {
   // user axios secure
   const axiosSecure = useAxiosSecure();
   const [cart, refacth] = useCart()
+  const navigate = useNavigate()
   // calculate total price 
   const totalPrice = cart.reduce((total, item) => total + item.price, 0)
 
@@ -79,6 +81,7 @@ const StripeForm = () => {
         const payment = {
           name: user?.displayName,
           email: user?.email,
+          price: totalPrice,
           transactionId: paymentIntent.id,
           date: new Date(), //obisuly convert in uts date
           cartIds: cart.map(item=> item._id),
@@ -91,6 +94,7 @@ const StripeForm = () => {
         if(res?.data?.paymetResult?.insertedId){
           toast.success('Payment success')
           refacth();
+          navigate('/dashboard/payment-history')
         }
       }
     }
