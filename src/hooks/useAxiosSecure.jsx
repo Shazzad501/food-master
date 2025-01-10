@@ -9,10 +9,11 @@ const useAxiosSecure = () => {
   const {logoutUser} = useAuth()
   const navigate = useNavigate()
 
-  
+
   // request interceptor to  add authorization header for every secure call into the api
   axiosSecure.interceptors.request.use(function(config){
     const token = localStorage.getItem('access-token')
+    // console.log('request stoped by interceptors. Before addin token', token)
     config.headers.authorization = `Bearer ${token}`
     return config;
   }, function(error){

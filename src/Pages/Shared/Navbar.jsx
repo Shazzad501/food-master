@@ -3,10 +3,13 @@ import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import { FaBars, FaShoppingCart } from 'react-icons/fa';
 import useCart from '../../hooks/useCart';
+import useAdmin from '../../hooks/useAdmin';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
   const {user, logoutUser} = useContext(AuthContext);
   const [cart] = useCart();
+  const [isAdmin] = useAdmin()
 
   const handleLogOut = ()=>{
     logoutUser()
@@ -42,14 +45,24 @@ const Navbar = () => {
       >Order Food</NavLink></li>
 
       {
-        user && <li><NavLink 
-        to='/dashboard'
+        user && isAdmin && <li><NavLink 
+        to='/dashboard/admin-home'
         className={({ isActive }) =>
           `hover:bg-transparent hover:border-b-2 bg-transparent font-bold ${
             isActive ? 'text-white' : 'text-[#ebd247]'
           }`}
         >Dashboard</NavLink></li>
       }
+      {
+        user && !isAdmin && <li><NavLink 
+        to='/dashboard/user-home'
+        className={({ isActive }) =>
+          `hover:bg-transparent hover:border-b-2 bg-transparent font-bold ${
+            isActive ? 'text-white' : 'text-[#ebd247]'
+          }`}
+        >Dashboard</NavLink></li>
+      }
+
 
       {
       user && <li><Link to='' onClick={handleLogOut} className="lg:hidden">Log out</Link></li>

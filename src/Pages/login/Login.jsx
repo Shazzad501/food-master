@@ -27,8 +27,8 @@ const Login = () => {
   const handleLogin = (e) =>{
     e.preventDefault();
 
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value.trim();
    
     loginUser(email, password)
       .then(res=>{

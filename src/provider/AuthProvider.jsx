@@ -62,30 +62,14 @@ const AuthProvider = ({children}) => {
         axiosPublic.post('/jwt', userInfo)
         .then(res=>{
           if(res.data.token){
-            localStorage.setItem('access-token', res.data.token)
-            // token accept popup
-            // Swal.fire({
-            //   title: "Accept all cookie!!",
-            //   showClass: {
-            //     popup: `
-            //       animate__animated
-            //       animate__fadeInUp
-            //       animate__faster
-            //     `
-            //   },
-            //   hideClass: {
-            //     popup: `
-            //       animate__animated
-            //       animate__fadeOutDown
-            //       animate__faster
-            //     `
-            //   }
-            // });
+            localStorage.setItem('access-token', res.data.token);
+            setLoading(false)
           }
         })
       }
       else{
         localStorage.removeItem('access-token')
+        setLoading(false);
       }
       setLoading(false)
     })
